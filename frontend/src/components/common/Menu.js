@@ -12,13 +12,13 @@ const Menu = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto">
-            <NavLink to="/" className="nav-item nav-link">
+            <NavLink to="/api" className="nav-item nav-link">
               Home
             </NavLink>
-            <NavLink to="/archive" className="nav-item nav-link">
+            <NavLink to="/api/archive" className="nav-item nav-link">
               Archived notes
             </NavLink>
-            <NavLink to="/createNote" className="nav-item nav-link linkNewNote">
+            <NavLink to="/api/newNote" className="nav-item nav-link linkNewNote">
               Create new note
             </NavLink>
           </Nav>
