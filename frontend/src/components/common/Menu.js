@@ -15,13 +15,10 @@ const Menu = () => {
             <NavLink to="/" className="nav-item nav-link">
               Home
             </NavLink>
-            <NavLink to="/views/Archive.js" className="nav-item nav-link">
+            <NavLink to="/archive" className="nav-item nav-link">
               Archived notes
             </NavLink>
-            <NavLink
-              to="../views/CreateNote.js"
-              className="nav-item nav-link linkNewNote"
-            >
+            <NavLink to="/createNote" className="nav-item nav-link linkNewNote">
               Create new note
             </NavLink>
           </Nav>
