@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Card } from "react-bootstrap";
+import { Col, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,31 +7,55 @@ import {
   faPenToSquare,
   faArchive,
 } from "@fortawesome/free-solid-svg-icons";
+import axios from "../../axios";
 
-const Note = () => {
+const Note = (props) => {
+  const handleDelete = () => {
+    console.log(props.note.id);
+    axios
+      .delete(`http://localhost:3001/api/${props.note.id}`)
+      .then(() => console.log("Delete successful"));
+    props.consultApi();
+  };
+
+  const handleArchive = () => {
+    let arch;
+    if (props.note.archived === false) {
+      arch = true;
+    } else {
+      arch = false;
+    }
+
+    axios
+      .put(`/api/${props.note.id}`, {
+        title: props.note.title,
+        content: props.note.content,
+        archived: arch,
+      })
+      .then(() => console.log("Archived successful"));
+    props.consultApi();
+  };
+
   return (
     <Col>
       <Card>
         <Card.Body>
-          <Card.Title>Card Title</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </Card.Text>
+          <Card.Title>{props.note.title}</Card.Title>
+          <Card.Text>{props.note.content}</Card.Text>
         </Card.Body>
         <Card.Footer className="d-flex justify-content-end w-100">
-          <Link className="btn btn-secondary">
+          <Button className="btn btn-secondary" onClick={handleArchive}>
             <FontAwesomeIcon icon={faArchive} />
-          </Link>
-          <Link className="btn btn-primary mx-2">
+          </Button>
+          <Link
+            className="btn btn-primary mx-2"
+            to={`/api/editNote/${props.note.id}`}
+          >
             <FontAwesomeIcon icon={faPenToSquare} />
           </Link>
-          <Link
-            // to={``}
-            className="btn btn-danger"
-          >
+          <Button onClick={handleDelete} className="btn btn-danger">
             <FontAwesomeIcon icon={faTrash} />
-          </Link>
+          </Button>
         </Card.Footer>
       </Card>
     </Col>
