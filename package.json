@@ -1,0 +1,24 @@
+{
+  "name": "ensolvers-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd backend && npm start\" \"cd frontend && npm start\"",
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valeormaechea/ensolvers-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/valeormaechea/ensolvers-test/issues"
+  },
+  "homepage": "https://github.com/valeormaechea/ensolvers-test#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

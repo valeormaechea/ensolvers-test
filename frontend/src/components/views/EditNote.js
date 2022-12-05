@@ -57,7 +57,7 @@ const EditNote = () => {
           archived: note.archived,
         })
         .then(() => console.log("Edited successfully"));
-      navegation("/api/archive");
+      navegation("/");
     } catch (error) {
       console.log(error);
     }

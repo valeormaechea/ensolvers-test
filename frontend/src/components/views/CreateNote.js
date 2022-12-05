@@ -47,7 +47,7 @@ const CreateNote = () => {
           archived: false,
         })
         .then(() => console.log("Creation successful"));
-      navegation("/api");
+      navegation("/");
     } catch (error) {
       console.log(error);
     }
