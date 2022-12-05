@@ -1,19 +1,55 @@
 import React, { useState } from "react";
 import { Button, Form, Alert } from "react-bootstrap";
-import { textLength } from "./helper";
+import { findErrors } from "./helper";
+import axios from "../../axios";
+import { useNavigate } from "react-router-dom";
 
 const CreateNote = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [note, setNote] = useState("");
   const [errorMsg, setErrorMsg] = useState(false);
+  const [errors, setErrors] = useState({});
+  const navegation = useNavigate();
+  const setAttribute = (attribute, value) => {
+    setNote({
+      ...note,
+      [attribute]: value,
+    });
+
+    if (!!errors[attribute])
+      setErrors({
+        ...errors,
+        [attribute]: null,
+      });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Validate inputs
-    if (textLength(title, 2, 20) && textLength(content, 5, 100)) {
-      setErrorMsg(false);
-    } else {
+    if (note.title === undefined) {
+      note.title = "";
+    }
+
+    if (note.content === undefined) {
+      note.content = "";
+    }
+    const newErrors = findErrors(note);
+    if (Object.keys(newErrors).length > 0) {
       setErrorMsg(true);
+      setErrors(newErrors);
+      return;
+    }
+    setErrorMsg(false);
+
+    try {
+      axios
+        .post("/api/newNote", {
+          title: note.title,
+          content: note.content,
+          archived: false,
+        })
+        .then(() => console.log("Creation successful"));
+      navegation("/api");
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -28,7 +64,8 @@ const CreateNote = () => {
             type="text"
             placeholder="Homework"
             required
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => setAttribute("title", e.target.value)}
+            isInvalid={!!errors.title}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="noteContent">
@@ -36,7 +73,8 @@ const CreateNote = () => {
           <Form.Control
             as="textarea"
             rows={3}
-            onChange={(e) => setContent(e.target.value)}
+            onChange={(e) => setAttribute("content", e.target.value)}
+            isInvalid={!!errors.content}
           />
         </Form.Group>
 
@@ -46,7 +84,7 @@ const CreateNote = () => {
       </Form>
       {errorMsg ? (
         <Alert variant="danger" className="mt-3">
-          Please verify.
+          Please verify. Title must be between 5 and 30 characters long, and content between 5 and 100 characters long.
         </Alert>
       ) : null}
     </section>
