@@ -17,6 +17,7 @@ This notes app is made to create, edit, delete and archive different notes, just
 - Frontend dependencies:
 
   - [React-Bootstrap](https://react-bootstrap.github.io/) (v2.6.0)
+  - [SweetAlert](https://sweetalert2.github.io/#download) (v11.6.15)
   - [Bootstrap](https://getbootstrap.com/) (v5.2.3)
   - [react-router-dom](https://reactrouter.com/en/main) (v6.4.4)
   - [axios](https://axios-http.com/docs/intro) (v1.2.0)

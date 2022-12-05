@@ -73,7 +73,11 @@ const deleteNote = async (req, res) => {
     res.status(200).json({
       mensaje: "El producto se elimino correctamente",
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).json({
+      message: "Error",
+    });
+  }
 };
 
 const archiveNote = async (req, res) => {

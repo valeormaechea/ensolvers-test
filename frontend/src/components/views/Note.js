@@ -8,14 +8,35 @@ import {
   faArchive,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "../../axios";
+import Swal from "sweetalert2";
 
 const Note = (props) => {
   const handleDelete = () => {
-    console.log(props.note.id);
-    axios
-      .delete(`/api/${props.note.id}`)
-      .then(() => console.log("Delete successful"));
-    props.consultApi();
+    Swal.fire({
+      title: "Do you want to delete this note?",
+      text: "You can't retrieve it later",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Delete",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          axios
+            .delete(`/api/${props.note.id}`)
+            .then(() => console.log("Delete successful"));
+          props.consultApi();
+        } catch (error) {
+          Swal.fire({
+            icon: "error",
+            title: "Something went wrong",
+            text: "Try it later",
+          });
+        }
+      }
+    });
   };
 
   const handleArchive = () => {
