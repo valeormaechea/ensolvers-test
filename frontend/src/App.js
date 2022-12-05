@@ -13,7 +13,7 @@ const App = () => {
       <BrowserRouter>
         <Menu></Menu>
         <Routes>
-          <Route exact path="/api" element={<Home />}></Route>
+          <Route exact path="/" element={<Home />}></Route>
           <Route exact path="/api/newNote" element={<CreateNote />}></Route>
           <Route exact path="/api/archive" element={<Archive />}></Route>
           <Route exact path="/api/editNote/:id" element={<EditNote />}></Route>

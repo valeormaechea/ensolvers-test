@@ -51,7 +51,7 @@ const EditNote = () => {
 
     try {
       axios
-        .put(`http://localhost:3001/api/editNote/${id}`, {
+        .put(`/api/editNote/${id}`, {
           title: note.title,
           content: note.content,
           archived: note.archived,
