@@ -13,7 +13,7 @@ const Note = (props) => {
   const handleDelete = () => {
     console.log(props.note.id);
     axios
-      .delete(`http://localhost:3001/api/${props.note.id}`)
+      .delete(`/api/${props.note.id}`)
       .then(() => console.log("Delete successful"));
     props.consultApi();
   };
